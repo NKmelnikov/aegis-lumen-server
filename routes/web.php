@@ -15,19 +15,11 @@ $router->group(["prefix"=> "auth"], function () use ($router) {
 $router->group(
     [
         "middleware" => "jwt.auth",
-        "prefix" => "api/v1/categories"
     ],
     function () use ($router) {
-        $router->get("/", "CategoriesController@index");
-        $router->post("/", "CategoriesController@store");
-        $router->get("/{id}", "CategoriesController@show");
-        $router->put("/{id}", "CategoriesController@update");
-        $router->delete("/{id}", "CategoriesController@destroy");
+        $router->post("/upload-img-from-b64", "Admin\UploadController@uploadFromBase64");
 
-        $router->post("/{id}/items", "ItemsController@store");
-        $router->get("/{id}/items", "ItemsController@index");
-        $router->get("/{id}/items/{item_id}", "ItemsController@show");
-        $router->put("/{id}/items/{item_id}", "ItemsController@update");
-        $router->delete("/{id}/items/{item_id}", "ItemsController@destroy");
+        $router->get("/get-brands", "Admin\BrandController@getAll");
+        $router->post("/create-brand", "Admin\BrandController@create");
     }
 );

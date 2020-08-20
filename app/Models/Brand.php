@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
     protected $fillable = [
-        'active','name', 'description', 'img_path',
+        'active', 'position', 'slug', 'name', 'description', 'imgPath'
     ];
 }
