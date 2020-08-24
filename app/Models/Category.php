@@ -9,6 +9,6 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = [
-        'active','name', 'description', 'main_type',
+        'active', 'type', 'position', 'name', 'description',
     ];
 }

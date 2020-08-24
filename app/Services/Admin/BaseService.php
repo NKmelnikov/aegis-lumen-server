@@ -40,19 +40,24 @@ class BaseService
 
         try {
             $this->model::create($request->all());
-            return response()->json(["message" => "brand created"]);
+            $this->updatePosition();
+            return response()->json(["message" => "success"]);
         } catch (Exception $e) {
             return response()->json(["message" => $e->getMessage()], 400);
         }
     }
 
-    public function update(Request $request, $validate)
+    public function update(Request $request, $rules)
     {
-        $validate($request);
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json(['validationErrors' => $validator->errors()], 400);
+        }
 
         try {
             $this->model::find($request->all()['id'])->update($request->all());
-            return response()->json(["message" => "brand updated"]);
+            return response()->json(["message" => "success"]);
         } catch (Exception $e) {
             return response()->json(["message" => $e->getMessage()], 400);
         }
@@ -62,28 +67,34 @@ class BaseService
     {
         try {
             $this->model::find($request->all()['id'])->delete();
-            return response()->json(["message" => "brand deleted"]);
+            $this->updatePosition();
+            return response()->json(["message" => "success"]);
         } catch (Exception $e) {
             return response()->json(["message" => $e->getMessage()], 400);
         }
     }
 
-    public function updatePosition()
+    public function updatePosition(Request $request = null)
     {
-        $items = $this->model::all()->toArray() ?: [];
+        $items = (!is_null($request))
+            ? json_decode($request['data'], true)
+            : $this->model::orderBy('position')->get();
+
         foreach ($items as $i => $item) {
+            Log::info($item);
             try {
                 $this->model::where('id', $item['id'])->update(['position' => $i+1]);
             } catch (Exception $e) {
                 return response()->json(["message" => $e->getMessage()], 400);
             }
         }
-        return response()->json(["message" => "position changed"]);
+
+        return $this->model::orderBy('position')->get();
     }
 
-    public function bulkActivate()
+    public function bulkActivate(Request $request)
     {
-        $items = $this->model::all()->toArray() ?: [];
+        $items = json_decode($request['data'], true);
         foreach ($items as $i => $item) {
             try {
                 $this->model::where('id', $item['id'])->update(['active' => 1]);
@@ -94,9 +105,9 @@ class BaseService
         return response()->json(["message" => "activated"]);
     }
 
-    public function bulkDeactivate()
+    public function bulkDeactivate(Request $request)
     {
-        $items = $this->model::all()->toArray() ?: [];
+        $items = json_decode($request['data'], true);
         foreach ($items as $i => $item) {
             try {
                 $this->model::where('id', $item['id'])->update(['active' => 0]);
@@ -108,9 +119,9 @@ class BaseService
 
     }
 
-    public function bulkDelete()
+    public function bulkDelete(Request $request)
     {
-        $items = $this->model::all()->toArray() ?: [];
+        $items = json_decode($request['data'], true);
         foreach ($items as $i => $item) {
             try {
                 $this->model::where('id', $item['id'])->delete();
@@ -118,6 +129,7 @@ class BaseService
                 return response()->json(["message" => $e->getMessage()], 400);
             }
         }
+        $this->updatePosition();
         return response()->json(["message" => "deleted"]);
     }
 }

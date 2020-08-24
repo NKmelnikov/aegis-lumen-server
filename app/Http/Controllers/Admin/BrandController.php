@@ -46,17 +46,17 @@ class BrandController
         return $this->brandService->delete($request);
     }
 
-    public function updatePosition() {
-        $this->brandService->updatePosition();
+    public function updatePosition(Request $request) {
+        $this->brandService->updatePosition($request);
     }
 
-    public function bulkActivate() {
-        $this->brandService->bulkActivate();
+    public function bulkActivate(Request $request) {
+        $this->brandService->bulkActivate($request);
     }
-    public function bulkDeactivate() {
-        $this->brandService->bulkDeactivate();
+    public function bulkDeactivate(Request $request) {
+        $this->brandService->bulkDeactivate($request);
     }
-    public function bulkDelete() {
-        $this->brandService->bulkDelete();
+    public function bulkDelete(Request $request) {
+        $this->brandService->bulkDelete($request);
     }
 }

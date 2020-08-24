@@ -45,13 +45,13 @@ class CatalogController
         $this->catalogService->updatePosition();
     }
 
-    public function bulkActivate() {
-        $this->catalogService->bulkActivate();
+    public function bulkActivate(Request $request) {
+        $this->catalogService->bulkActivate($request);
     }
-    public function bulkDeactivate() {
-        $this->catalogService->bulkDeactivate();
+    public function bulkDeactivate(Request $request) {
+        $this->catalogService->bulkDeactivate($request);
     }
-    public function bulkDelete() {
-        $this->catalogService->bulkDelete();
+    public function bulkDelete(Request $request) {
+        $this->catalogService->bulkDelete($request);
     }
 }

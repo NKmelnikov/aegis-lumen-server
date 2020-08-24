@@ -4,18 +4,17 @@
 namespace App\Services\Admin;
 
 
-use App\Models\News;
+use App\Models\Category;
 use Exception;
 use Illuminate\Http\Request;
 use function response;
 
-
-class NewsService extends BaseService
+class CategoryService extends BaseService
 {
-    public function getBrandBySlug(Request $request)
+    public function getById(Request $request)
     {
         try {
-            return response()->json(News::where('slug', $request->all()['slug'])->first());
+            return response()->json(Category::where('id', $request->all()['id'])->first());
         } catch (Exception $e) {
             return response()->json(["message" => $e->getMessage()], 400);
         }

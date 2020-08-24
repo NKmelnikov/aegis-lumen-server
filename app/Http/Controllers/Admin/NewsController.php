@@ -43,17 +43,17 @@ class NewsController
         return $this->newsService->delete($request);
     }
 
-    public function updatePosition() {
-        $this->newsService->updatePosition();
+    public function updatePosition(Request $request) {
+        $this->newsService->updatePosition($request);
     }
 
-    public function bulkActivate() {
-        $this->newsService->bulkActivate();
+    public function bulkActivate(Request $request) {
+        $this->newsService->bulkActivate($request);
     }
-    public function bulkDeactivate() {
-        $this->newsService->bulkDeactivate();
+    public function bulkDeactivate(Request $request) {
+        $this->newsService->bulkDeactivate($request);
     }
-    public function bulkDelete() {
-        $this->newsService->bulkDelete();
+    public function bulkDelete(Request $request) {
+        $this->newsService->bulkDelete($request);
     }
 }

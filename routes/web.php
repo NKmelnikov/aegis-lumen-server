@@ -52,5 +52,42 @@ $router->group(
         $router->post("/bulk-activate-posts", "Admin\NewsController@bulkActivate");
         $router->post("/bulk-deactivate-posts", "Admin\NewsController@bulkDeactivate");
         $router->post("/bulk-delete-posts", "Admin\NewsController@bulkDelete");
+//        categories
+        $router->get("/get-categories", "Admin\CategoryController@getAll");
+        $router->post("/get-category-by-id", "Admin\CategoryController@getById");
+        $router->post("/create-category", "Admin\CategoryController@create");
+        $router->post("/update-category", "Admin\CategoryController@update");
+        $router->post("/delete-category", "Admin\CategoryController@delete");
+        $router->post("/update-category-position", "Admin\CategoryController@updatePosition");
+        $router->post("/bulk-activate-categories", "Admin\CategoryController@bulkActivate");
+        $router->post("/bulk-deactivate-categories", "Admin\CategoryController@bulkDeactivate");
+        $router->post("/bulk-delete-categories", "Admin\CategoryController@bulkDelete");
+//        subcategories
+        $router->get("/get-subcategories", "Admin\SubcategoryController@getAll");
+        $router->post("/create-subcategory", "Admin\SubcategoryController@create");
+        $router->post("/update-subcategory", "Admin\SubcategoryController@update");
+        $router->post("/delete-subcategory", "Admin\SubcategoryController@delete");
+        $router->post("/update-subcategory-position", "Admin\SubcategoryController@updatePosition");
+        $router->post("/bulk-activate-subcategories", "Admin\SubcategoryController@bulkActivate");
+        $router->post("/bulk-deactivate-subcategories", "Admin\SubcategoryController@bulkDeactivate");
+        $router->post("/bulk-delete-subcategories", "Admin\SubcategoryController@bulkDelete");
+//        products_oil
+        $router->get("/get-products-oil", "Admin\ProductsOilController@getAll");
+        $router->post("/create-product-oil", "Admin\ProductsOilController@create");
+        $router->post("/update-product-oil", "Admin\ProductsOilController@update");
+        $router->post("/delete-product-oil", "Admin\ProductsOilController@delete");
+        $router->post("/update-product-oil-position", "Admin\ProductsOilController@updatePosition");
+        $router->post("/bulk-activate-products-oil", "Admin\ProductsOilController@bulkActivate");
+        $router->post("/bulk-deactivate-products-oil", "Admin\ProductsOilController@bulkDeactivate");
+        $router->post("/bulk-delete-products-oil", "Admin\ProductsOilController@bulkDelete");
+//        products_drill
+        $router->get("/get-products-drill", "Admin\ProductsDrillController@getAll");
+        $router->post("/create-product-drill", "Admin\ProductsDrillController@create");
+        $router->post("/update-product-drill", "Admin\ProductsDrillController@update");
+        $router->post("/delete-product-drill", "Admin\ProductsDrillController@delete");
+        $router->post("/update-product-drill-position", "Admin\ProductsDrillController@updatePosition");
+        $router->post("/bulk-activate-products-drill", "Admin\ProductsDrillController@bulkActivate");
+        $router->post("/bulk-deactivate-products-drill", "Admin\ProductsDrillController@bulkDeactivate");
+        $router->post("/bulk-delete-products-drill", "Admin\ProductsDrillController@bulkDelete");
     }
 );

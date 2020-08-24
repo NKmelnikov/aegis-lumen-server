@@ -18,7 +18,6 @@ class Categories extends Migration
             $table->smallInteger('active')->unsigned()->default(1);
             $table->smallInteger('position')->unsigned()->default(1);
             $table->smallInteger('type')->unsigned()->default(1);
-            $table->smallInteger('main_type');
             $table->string('name');
             $table->mediumText('description');
             $table->timestamps();
