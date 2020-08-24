@@ -3,38 +3,60 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Brand;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Response;
+use App\Services\Admin\BrandService;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
-use Laravel\Lumen\Routing\Controller as BaseController;
 
-class BrandController extends BaseController
+class BrandController
 {
+    /**
+     * @var BrandService
+     */
+    private $brandService;
+
+    public $validatorRules = [
+        "active" => "required",
+        "slug" => "required|string|unique:brands",
+        "name" => "required|string|min:2|max:255",
+        "description" => "nullable|min:2|max:255",
+        "imgPath" => "required|string|min:2|max:255",
+    ];
+
+    public function __construct()
+    {
+        $this->brandService = new BrandService(Brand::class);
+    }
+
     public function getAll() {
-        return Response::json(Brand::all());
+        return $this->brandService->getAll();
+    }
+
+    public function getBrandBySlug(Request $request) {
+        return $this->brandService->getBrandBySlug($request);
     }
 
     public function create(Request $request) {
-        try {
-            $brand = $this->validate($request, [
-                "active" => "required",
-                "slug" => "required|string|unique:brands",
-                "name" => "required|string|min:2|max:255",
-                "description" => "nullable|min:2|max:255",
-                "imgPath" => "required|string|min:2|max:255",
-            ]);
-        } catch (ValidationException $e) {
-            return Response::json(["message" => $e->getMessage()], 400);
-        }
+        return $this->brandService->create($request, $this->validatorRules);
+    }
 
-        Log::info($brand);
+    public function update(Request $request) {
+        return $this->brandService->update($request, $this->validatorRules);
+    }
 
-        try {
-            Brand::create($brand);
-            return Response::json(["message" => "brand created"]);
-        } catch (\Exception $e) {
-            return Response::json(["message" => $e->getMessage()], 400);
-        }
+    public function delete(Request $request) {
+        return $this->brandService->delete($request);
+    }
+
+    public function updatePosition() {
+        $this->brandService->updatePosition();
+    }
+
+    public function bulkActivate() {
+        $this->brandService->bulkActivate();
+    }
+    public function bulkDeactivate() {
+        $this->brandService->bulkDeactivate();
+    }
+    public function bulkDelete() {
+        $this->brandService->bulkDelete();
     }
 }

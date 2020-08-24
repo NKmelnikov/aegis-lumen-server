@@ -19,7 +19,7 @@ class News extends Migration
             $table->smallInteger('position')->unsigned()->default(1);
             $table->string('slug', 200)->unique();
             $table->string('category')->nullable();
-            $table->string('title', 100);
+            $table->string('title');
             $table->mediumText('shortText');
             $table->mediumText('article');
             $table->string('imgPath');
