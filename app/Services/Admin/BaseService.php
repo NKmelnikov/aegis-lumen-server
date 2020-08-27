@@ -32,6 +32,7 @@ class BaseService
 
     public function create(Request $request, $rules)
     {
+
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
@@ -78,10 +79,10 @@ class BaseService
     {
         $items = (!is_null($request))
             ? json_decode($request['data'], true)
-            : $this->model::orderBy('position')->get();
+            : $this->model::orderBy('created_at', 'DESC')->get();
 
+        Log::info($items);
         foreach ($items as $i => $item) {
-            Log::info($item);
             try {
                 $this->model::where('id', $item['id'])->update(['position' => $i+1]);
             } catch (Exception $e) {
@@ -122,14 +123,16 @@ class BaseService
     public function bulkDelete(Request $request)
     {
         $items = json_decode($request['data'], true);
-        foreach ($items as $i => $item) {
-            try {
+        try {
+            foreach ($items as $i => $item) {
+                Log::info($item);
                 $this->model::where('id', $item['id'])->delete();
-            } catch (Exception $e) {
-                return response()->json(["message" => $e->getMessage()], 400);
             }
+            $this->updatePosition();
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 400);
         }
-        $this->updatePosition();
+
         return response()->json(["message" => "deleted"]);
     }
 }

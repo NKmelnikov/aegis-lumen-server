@@ -11,4 +11,9 @@ class Category extends Model
     protected $fillable = [
         'active', 'type', 'position', 'name', 'description',
     ];
+
+    public function subcategories()
+    {
+        return $this->hasMany('App\Models\Subcategory')->orderBy('position');
+    }
 }

@@ -55,7 +55,6 @@ class UploadController extends BaseController
         $name = $request->file('upload')->getClientOriginalName();
         $url = sprintf('%s%s/storage/img/%s__%s', env('APP_URL'), env('APP_PORT'), $time, $name);
 
-        Log::info(json_encode(['url' => $url], JSON_UNESCAPED_SLASHES));
         try {
             $request->file('upload')->move(storage_path('app/public/img/'), $time . '__' . $name);
             return json_encode(['uploaded' => true,'url' => $url], JSON_UNESCAPED_SLASHES);

@@ -13,10 +13,10 @@ class Product extends Model
     ];
 
     public function subcategory(){
-        return $this->belongsTo('App\Subcategory', 'subcategory_id');
+        return $this->belongsTo('App\Models\Subcategory', 'subcategory_id');
     }
 
     public function category(){
-        return $this->belongsTo('App\Category', 'category_id');
+        return $this->belongsTo('App\Models\Category', 'category_id');
     }
 }

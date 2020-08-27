@@ -63,7 +63,7 @@ $router->group(
         $router->post("/bulk-deactivate-categories", "Admin\CategoryController@bulkDeactivate");
         $router->post("/bulk-delete-categories", "Admin\CategoryController@bulkDelete");
 //        subcategories
-        $router->get("/get-subcategories", "Admin\SubcategoryController@getAll");
+        $router->post("/get-by-category-id", "Admin\SubcategoryController@getByCategoryId");
         $router->post("/create-subcategory", "Admin\SubcategoryController@create");
         $router->post("/update-subcategory", "Admin\SubcategoryController@update");
         $router->post("/delete-subcategory", "Admin\SubcategoryController@delete");
