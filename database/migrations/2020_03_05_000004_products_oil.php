@@ -24,6 +24,7 @@ class ProductsOil extends Migration
             $table->string('slug');
             $table->mediumText('description');
             $table->mediumText('spec');
+            $table->string('imgPath');
             $table->string('pdf1Path');
             $table->string('pdf2Path');
             $table->timestamps();

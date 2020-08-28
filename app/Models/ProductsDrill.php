@@ -4,12 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class ProductsDrill extends Model
 {
-    protected $table = 'products';
+    protected $table = 'products_oil';
 
     protected $fillable = [
-        'name', 'description', 'active', 'category_id', 'subcategory_id', 'tech_description_path', 'tech_passport_path'
+        'brand_id',
+        'category_id',
+        'subcategory_id',
+        'active',
+        'position',
+        'name',
+        'description',
+        'pdfPath',
     ];
 
     public function subcategory(){
@@ -18,5 +25,9 @@ class Product extends Model
 
     public function category(){
         return $this->belongsTo('App\Models\Category', 'category_id');
+    }
+
+    public function brand(){
+        return $this->belongsTo('App\Models\Brand', 'brand_id');
     }
 }
