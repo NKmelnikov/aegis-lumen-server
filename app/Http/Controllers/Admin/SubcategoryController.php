@@ -26,6 +26,10 @@ class SubcategoryController
         $this->subcategoryService = new SubcategoryService(Subcategory::class);
     }
 
+    public function getAll() {
+        return $this->subcategoryService->getAll();
+    }
+
     public function getByCategoryId(Request $request) {
         return $this->subcategoryService->getByCategoryId($request);
     }

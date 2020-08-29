@@ -37,6 +37,10 @@ class ProductsOilController
         return $this->productsOilService->getAll();
     }
 
+    public function getBySlug(Request $request) {
+        return $this->productsOilService->getBySlug($request);
+    }
+
     public function create(Request $request) {
         return $this->productsOilService->create($request, $this->validatorRules);
     }

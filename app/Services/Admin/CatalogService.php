@@ -12,16 +12,17 @@ class CatalogService extends BaseService
 
     public function getAll()
     {
-        $catalogs = DB::table('catalogs')
-            ->join('brands', 'catalogs.brand_id', '=', 'brands.id')
-            ->select('catalogs.id as id',
-                   'catalogs.brand_id',
-                   'brands.name as brand_name',
-                   'catalogs.active',
-                   'catalogs.position',
-                   'catalogs.name',
-                   'catalogs.pdfPath',
-                   'catalogs.created_at')
+        $catalogs = DB::table('catalogs as c')
+            ->join('brands as b', 'c.brand_id', '=', 'b.id')
+            ->select('c.id as id',
+                   'c.brand_id',
+                   'b.name as brand_name',
+                   'c.active',
+                   'c.position',
+                   'c.name',
+                   'c.pdfPath',
+                   'c.created_at')
+            ->orderBy('c.position')
             ->get();
         try {
             return response()->json($catalogs);

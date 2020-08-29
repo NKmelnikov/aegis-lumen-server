@@ -30,8 +30,8 @@ class BrandController
         return $this->brandService->getAll();
     }
 
-    public function getBrandBySlug(Request $request) {
-        return $this->brandService->getBrandBySlug($request);
+    public function getBySlug(Request $request) {
+        return $this->brandService->getBySlug($request);
     }
 
     public function create(Request $request) {

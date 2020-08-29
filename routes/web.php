@@ -26,7 +26,7 @@ $router->group(
         $router->post("/upload-pdf", "Admin\UploadController@uploadPdf");
 //        brands
         $router->get("/get-brands", "Admin\BrandController@getAll");
-        $router->post("/get-brand-by-slug", "Admin\BrandController@getBrandBySlug");
+        $router->post("/get-brand-by-slug", "Admin\BrandController@getBySlug");
         $router->post("/create-brand", "Admin\BrandController@create");
         $router->post("/update-brand", "Admin\BrandController@update");
         $router->post("/delete-brand", "Admin\BrandController@delete");
@@ -63,6 +63,7 @@ $router->group(
         $router->post("/bulk-deactivate-categories", "Admin\CategoryController@bulkDeactivate");
         $router->post("/bulk-delete-categories", "Admin\CategoryController@bulkDelete");
 //        subcategories
+        $router->get("/get-subcategories", "Admin\SubcategoryController@getAll");
         $router->post("/get-by-category-id", "Admin\SubcategoryController@getByCategoryId");
         $router->post("/create-subcategory", "Admin\SubcategoryController@create");
         $router->post("/update-subcategory", "Admin\SubcategoryController@update");
@@ -73,6 +74,7 @@ $router->group(
         $router->post("/bulk-delete-subcategories", "Admin\SubcategoryController@bulkDelete");
 //        products_oil
         $router->get("/get-products-oil", "Admin\ProductsOilController@getAll");
+        $router->post("/get-product-oil-by-slug", "Admin\ProductsOilController@getBySlug");
         $router->post("/create-product-oil", "Admin\ProductsOilController@create");
         $router->post("/update-product-oil", "Admin\ProductsOilController@update");
         $router->post("/delete-product-oil", "Admin\ProductsOilController@delete");

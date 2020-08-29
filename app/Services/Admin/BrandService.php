@@ -14,10 +14,11 @@ class BrandService extends BaseService
 {
 
 
-    public function getBrandBySlug(Request $request)
+    public function getBySlug(Request $request)
     {
+        $slug = json_decode($request['slug']);
         try {
-            return response()->json(Brand::where('slug', $request->all()['slug'])->first());
+            return response()->json(Brand::with('catalogs')->where('slug', $slug)->orderBy('position')->get());
         } catch (Exception $e) {
             return response()->json(["message" => $e->getMessage()], 400);
         }
