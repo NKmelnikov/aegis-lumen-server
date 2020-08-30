@@ -24,9 +24,9 @@ class ProductsDrill extends Migration
             $table->mediumText('description');
             $table->string('pdfPath');
             $table->timestamps();
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
+            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('subcategory_id')->references('id')->on('subcategories');
         });
     }
 

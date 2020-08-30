@@ -22,7 +22,7 @@ class Subcategories extends Migration
             $table->string('name');
             $table->mediumText('description');
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
