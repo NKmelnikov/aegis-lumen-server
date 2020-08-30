@@ -13,21 +13,6 @@ class ProductsOilController
      */
     private $productsOilService;
 
-    public $validatorRules = [
-        "brand_id" => "required",
-        "category_id" => "required",
-        "subcategory_id" => "required",
-        "active" => "required",
-        "name" => "required|min:2|max:255",
-        "slug" => "required|min:2|max:255",
-        "description" => "required|min:2|max:1500",
-        "spec" => "nullable|max:1500",
-        "imgPath" => "required|min:2|max:255",
-        "pdf1Path" => "required|min:2|max:255",
-        "pdf2Path" => "required|min:2|max:255",
-    ];
-
-
     public function __construct()
     {
         $this->productsOilService = new ProductsOilService(ProductsOil::class);
@@ -42,11 +27,35 @@ class ProductsOilController
     }
 
     public function create(Request $request) {
-        return $this->productsOilService->create($request, $this->validatorRules);
+        return $this->productsOilService->create($request, [
+            "brand_id" => "required",
+            "category_id" => "required",
+            "subcategory_id" => "required",
+            "active" => "required",
+            "name" => "required|min:2|max:255",
+            "slug" => "required|min:2|max:255|unique:products_oil",
+            "description" => "required|min:2|max:1500",
+            "spec" => "nullable|max:1500",
+            "imgPath" => "required|min:2|max:255",
+            "pdf1Path" => "required|min:2|max:255",
+            "pdf2Path" => "required|min:2|max:255",
+        ]);
     }
 
     public function update(Request $request) {
-        return $this->productsOilService->update($request, $this->validatorRules);
+        return $this->productsOilService->update($request, [
+            "brand_id" => "required",
+            "category_id" => "required",
+            "subcategory_id" => "required",
+            "active" => "required",
+            "name" => "required|min:2|max:255",
+            "slug" => "required|min:2|max:255",
+            "description" => "required|min:2|max:1500",
+            "spec" => "nullable|max:1500",
+            "imgPath" => "required|min:2|max:255",
+            "pdf1Path" => "required|min:2|max:255",
+            "pdf2Path" => "required|min:2|max:255",
+        ]);
     }
 
     public function delete(Request $request) {

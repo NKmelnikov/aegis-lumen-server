@@ -13,47 +13,62 @@ class NewsController
      */
     private $newsService;
 
-    public $validatorRules = [
-        "active" => "required",
-        "slug" => "required|min:2|max:200|unique:news",
-        "title" => "required|min:2|max:255",
-        "shortText" => "required|min:2|max:400",
-        "article" => "required",
-        "imgPath" => "required|string|min:2|max:255",
-    ];
-
     public function __construct()
     {
         $this->newsService = new NewsService(News::class);
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         return $this->newsService->getAll();
     }
 
-    public function create(Request $request) {
-        return $this->newsService->create($request, $this->validatorRules);
+    public function create(Request $request)
+    {
+        return $this->newsService->create($request, [
+            "active" => "required",
+            "slug" => "required|min:2|max:200|unique:news",
+            "title" => "required|min:2|max:255",
+            "shortText" => "required|min:2|max:400",
+            "article" => "required",
+            "imgPath" => "required|string|min:2|max:255",
+        ]);
     }
 
-    public function update(Request $request) {
-        return $this->newsService->update($request, $this->validatorRules);
+    public function update(Request $request)
+    {
+        return $this->newsService->update($request, [
+            "active" => "required",
+            "slug" => "required|min:2|max:200",
+            "title" => "required|min:2|max:255",
+            "shortText" => "required|min:2|max:400",
+            "article" => "required",
+            "imgPath" => "required|string|min:2|max:255",
+        ]);
     }
 
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
         return $this->newsService->delete($request);
     }
 
-    public function updatePosition(Request $request) {
+    public function updatePosition(Request $request)
+    {
         $this->newsService->updatePosition($request);
     }
 
-    public function bulkActivate(Request $request) {
+    public function bulkActivate(Request $request)
+    {
         $this->newsService->bulkActivate($request);
     }
-    public function bulkDeactivate(Request $request) {
+
+    public function bulkDeactivate(Request $request)
+    {
         $this->newsService->bulkDeactivate($request);
     }
-    public function bulkDelete(Request $request) {
+
+    public function bulkDelete(Request $request)
+    {
         $this->newsService->bulkDelete($request);
     }
 }
