@@ -34,7 +34,7 @@ class ProductsOilController
             "active" => "required",
             "name" => "required|min:2|max:255",
             "slug" => "required|min:2|max:255|unique:products_oil",
-            "description" => "required|min:2|max:1500",
+            "description" => "nullable|min:2|max:1500",
             "spec" => "nullable|max:1500",
             "imgPath" => "required|min:2|max:255",
             "pdf1Path" => "required|min:2|max:255",

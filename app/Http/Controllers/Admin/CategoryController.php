@@ -17,7 +17,7 @@ class CategoryController
         "active" => "required",
         "type" => "required",
         "name" => "required|max:255",
-        "description" => "required|min:2|max:1500",
+        "description" => "nullable|min:2|max:2000",
     ];
 
     public function __construct()
