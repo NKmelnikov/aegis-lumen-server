@@ -22,7 +22,8 @@ class Subcategories extends Migration
             $table->string('name');
             $table->mediumText('description');
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->index('id', 'id_subcategories');
+            $table->index('category_id', 'category_id_subcategories');
         });
     }
 

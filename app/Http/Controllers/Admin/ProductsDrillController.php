@@ -19,7 +19,7 @@ class ProductsDrillController
         "subcategory_id" => "required",
         "active" => "required",
         "name" => "required|max:255",
-        "description" => "nullable|min:2|max:1500",
+        "description" => "nullable",
         "pdfPath" => "required|min:2|max:255",
     ];
 

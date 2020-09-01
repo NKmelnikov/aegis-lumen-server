@@ -21,7 +21,8 @@ class Catalogs extends Migration
             $table->string('name')->nullable();
             $table->string('pdfPath');
             $table->timestamps();
-            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->index('id', 'id_catalogs');
+            $table->index('brand_id', 'brand_id_catalogs');
         });
     }
 

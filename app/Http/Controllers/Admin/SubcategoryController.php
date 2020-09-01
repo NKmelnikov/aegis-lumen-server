@@ -17,7 +17,7 @@ class SubcategoryController
         "active" => "required",
         "category_id" => "required",
         "name" => "required|max:255",
-        "description" => "nullable|min:2|max:2000",
+        "description" => "nullable",
     ];
 
 

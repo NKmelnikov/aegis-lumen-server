@@ -14,10 +14,11 @@ class ProductsDrillService extends BaseService
 {
     public function getAll()
     {
-        $catalogs = DB::table('products_drill as  p')
-            ->join('brands as b', 'p.brand_id', '=', 'b.id')
-            ->join('categories as c', 'p.category_id', '=', 'c.id')
-            ->join('subcategories as s', 'p.subcategory_id', '=', 's.id')
+//        $productsDrill = DB::table('products_drill')->orderBy('p.position')->get();
+        $productsDrill = DB::table('products_drill as  p')
+            ->leftJoin('brands as b', 'p.brand_id', '=', 'b.id')
+            ->leftJoin('categories as c', 'p.category_id', '=', 'c.id')
+            ->leftJoin('subcategories as s', 'p.subcategory_id', '=', 's.id')
             ->select('p.id as id',
                 'p.brand_id',
                 'p.category_id',
@@ -34,7 +35,7 @@ class ProductsDrillService extends BaseService
             ->orderBy('p.position')
             ->get();
         try {
-            return response()->json($catalogs);
+            return response()->json($productsDrill);
         } catch (Exception $e) {
             return response()->json(["message" => $e->getMessage()], 400);
         }

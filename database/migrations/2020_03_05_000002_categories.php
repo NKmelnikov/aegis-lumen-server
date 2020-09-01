@@ -21,6 +21,7 @@ class Categories extends Migration
             $table->string('name');
             $table->mediumText('description');
             $table->timestamps();
+            $table->index('id', 'id_categories');
         });
     }
 

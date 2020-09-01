@@ -24,6 +24,7 @@ class News extends Migration
             $table->mediumText('article');
             $table->string('imgPath');
             $table->timestamps();
+            $table->index('slug', 'news_slug');
         });
     }
 

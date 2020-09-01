@@ -28,9 +28,11 @@ class ProductsOil extends Migration
             $table->string('pdf1Path');
             $table->string('pdf2Path');
             $table->timestamps();
-            $table->foreign('brand_id')->references('id')->on('brands');
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('subcategory_id')->references('id')->on('subcategories');
+            $table->index('id', 'id_oil');
+            $table->index('slug', 'slug_oil');
+            $table->index('brand_id', 'brand_id_oil');
+            $table->index('category_id','category_id_oil');
+            $table->index('subcategory_id', 'subcategory_id_oil');
         });
     }
 

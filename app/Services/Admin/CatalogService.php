@@ -13,7 +13,7 @@ class CatalogService extends BaseService
     public function getAll()
     {
         $catalogs = DB::table('catalogs as c')
-            ->join('brands as b', 'c.brand_id', '=', 'b.id')
+            ->leftJoin('brands as b', 'c.brand_id', '=', 'b.id')
             ->select('c.id as id',
                    'c.brand_id',
                    'b.name as brand_name',

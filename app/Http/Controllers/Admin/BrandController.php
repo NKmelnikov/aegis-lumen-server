@@ -34,7 +34,7 @@ class BrandController
             "active" => "required",
             "slug" => "required|min:2|unique:brands",
             "name" => "required|min:2|max:255",
-            "description" => "nullable|min:2|max:2000",
+            "description" => "nullable",
             "imgPath" => "required|string|min:2|max:255",
         ]);
     }
@@ -45,7 +45,7 @@ class BrandController
                 "active" => "required",
                 "slug" => "required|min:2",
                 "name" => "required|min:2|max:255",
-                "description" => "nullable|min:2|max:2000",
+                "description" => "nullable",
                 "imgPath" => "required|string|min:2|max:255",
             ]
         );

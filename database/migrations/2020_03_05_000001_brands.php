@@ -22,6 +22,8 @@ class Brands extends Migration
             $table->mediumText('description');
             $table->string('imgPath')->nullable();
             $table->timestamps();
+            $table->index('id', 'id_brand');
+            $table->index('slug', 'slug_brands');
         });
     }
 

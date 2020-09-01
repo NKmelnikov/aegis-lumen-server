@@ -24,9 +24,10 @@ class ProductsDrill extends Migration
             $table->mediumText('description');
             $table->string('pdfPath');
             $table->timestamps();
-            $table->foreign('brand_id')->references('id')->on('brands');
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('subcategory_id')->references('id')->on('subcategories');
+            $table->index('id', 'id_drill');
+            $table->index('brand_id', 'brand_id_drill');
+            $table->index('category_id', 'category_id_drill');
+            $table->index('subcategory_id', 'subcategory_id_drill');
         });
     }
 
