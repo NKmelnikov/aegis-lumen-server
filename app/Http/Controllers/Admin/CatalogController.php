@@ -17,6 +17,7 @@ class CatalogController
         "brand_id" => "required",
         "active" => "required",
         "name" => "string|min:2|max:255",
+        "imgPath" => "string|min:2|max:255",
         "pdfPath" => "string|min:2|max:255",
     ];
 

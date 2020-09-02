@@ -30,6 +30,7 @@ class ProductsDrillService extends BaseService
                 'p.position',
                 'p.name',
                 'p.description',
+                'p.imgPath',
                 'p.pdfPath',
                 'p.created_at')
             ->orderBy('p.position')

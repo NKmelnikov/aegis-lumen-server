@@ -81,7 +81,6 @@ class BaseService
             ? json_decode($request['data'], true)
             : $this->model::orderBy('created_at', 'DESC')->get();
 
-        Log::info($items);
         foreach ($items as $i => $item) {
             try {
                 $this->model::where('id', $item['id'])->update(['position' => $i+1]);
@@ -125,7 +124,6 @@ class BaseService
         $items = json_decode($request['data'], true);
         try {
             foreach ($items as $i => $item) {
-                Log::info($item);
                 $this->model::where('id', $item['id'])->delete();
             }
             $this->updatePosition();

@@ -17,6 +17,7 @@ class ProductsDrill extends Model
         'name',
         'description',
         'pdfPath',
+        'imgPath'
     ];
 
     public function subcategory(){

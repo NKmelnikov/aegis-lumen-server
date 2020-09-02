@@ -20,6 +20,7 @@ class ProductsDrillController
         "active" => "required",
         "name" => "required|max:255",
         "description" => "nullable",
+        "imgPath" => "required|min:2|max:255",
         "pdfPath" => "required|min:2|max:255",
     ];
 

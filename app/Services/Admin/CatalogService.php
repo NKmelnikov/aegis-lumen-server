@@ -20,6 +20,7 @@ class CatalogService extends BaseService
                    'c.active',
                    'c.position',
                    'c.name',
+                   'c.imgPath',
                    'c.pdfPath',
                    'c.created_at')
             ->orderBy('c.position')
