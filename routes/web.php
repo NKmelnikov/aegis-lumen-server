@@ -11,21 +11,20 @@ $router->group(["prefix" => "auth"], function () use ($router) {
     $router->post("/login", ["uses" => "AuthController@authenticate"]);
 });
 
-/**
- * Routes for categories and there items
- */
-$router->post("/ck-upload", "Admin\UploadController@ckUpload");
-$router->get("/get-brands", "Admin\BrandController@getAll");
-$router->post("/get-brand-by-slug", "Admin\BrandController@getBySlug");
-$router->get("/get-catalogs", "Admin\CatalogController@getAll");
-$router->get("/get-posts", "Admin\NewsController@getAll");
-$router->get("/get-categories", "Admin\CategoryController@getAll");
-$router->post("/get-category-by-id", "Admin\CategoryController@getById");
-$router->get("/get-subcategories", "Admin\SubcategoryController@getAll");
-$router->post("/get-by-category-id", "Admin\SubcategoryController@getByCategoryId");
-$router->get("/get-products-oil", "Admin\ProductsOilController@getAll");
-$router->post("/get-product-oil-by-slug", "Admin\ProductsOilController@getBySlug");
-$router->get("/get-products-drill", "Admin\ProductsDrillController@getAll");
+$router->group(["prefix" => "home"], function () use ($router) {
+    $router->post("/ck-upload", "Admin\UploadController@ckUpload");
+    $router->get("/get-brands", "Admin\BrandController@getAll");
+    $router->post("/get-brand-by-slug", "Admin\BrandController@getBySlug");
+    $router->get("/get-catalogs", "Admin\CatalogController@getAll");
+    $router->get("/get-posts", "Admin\NewsController@getAll");
+    $router->get("/get-categories", "Admin\CategoryController@getAll");
+    $router->post("/get-category-by-id", "Admin\CategoryController@getById");
+    $router->get("/get-subcategories", "Admin\SubcategoryController@getAll");
+    $router->post("/get-by-category-id", "Admin\SubcategoryController@getByCategoryId");
+    $router->get("/get-products-oil", "Admin\ProductsOilController@getAll");
+    $router->post("/get-product-oil-by-slug", "Admin\ProductsOilController@getBySlug");
+    $router->get("/get-products-drill", "Admin\ProductsDrillController@getAll");
+});
 
 $router->group(
     [
