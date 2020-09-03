@@ -6,13 +6,17 @@ use App\Models\Brand;
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
 $router->group(["prefix" => "auth"], function () use ($router) {
     $router->post("/register", "AuthController@register");
     $router->post("/login", ["uses" => "AuthController@authenticate"]);
 });
 
+$router->post("/ck-upload", "Admin\UploadController@ckUpload");
+$router->post("/upload-img-from-b64", "Admin\UploadController@uploadFromBase64");
+$router->post("/upload-pdf", "Admin\UploadController@uploadPdf");
+
 $router->group(["prefix" => "home"], function () use ($router) {
-    $router->post("/ck-upload", "Admin\UploadController@ckUpload");
     $router->get("/get-brands", "Admin\BrandController@getAll");
     $router->post("/get-brand-by-slug", "Admin\BrandController@getBySlug");
     $router->get("/get-catalogs", "Admin\CatalogController@getAll");
@@ -31,8 +35,6 @@ $router->group(
         "middleware" => "jwt.auth",
     ],
     function () use ($router) {
-        $router->post("/upload-img-from-b64", "Admin\UploadController@uploadFromBase64");
-        $router->post("/upload-pdf", "Admin\UploadController@uploadPdf");
 //        brands
         $router->post("/create-brand", "Admin\BrandController@create");
         $router->post("/update-brand", "Admin\BrandController@update");
