@@ -28,9 +28,9 @@ class ProductsOilController
 
     public function create(Request $request) {
         return $this->productsOilService->create($request, [
-            "brand_id" => "required",
+            "brand_id" => "nullable",
             "category_id" => "required",
-            "subcategory_id" => "required",
+            "subcategory_id" => "nullable",
             "active" => "required",
             "name" => "required|min:2|max:255",
             "slug" => "required|min:2|max:255|unique:products_oil",
@@ -44,9 +44,9 @@ class ProductsOilController
 
     public function update(Request $request) {
         return $this->productsOilService->update($request, [
-            "brand_id" => "required",
+            "brand_id" => "nullable",
             "category_id" => "required",
-            "subcategory_id" => "required",
+            "subcategory_id" => "nullable",
             "active" => "required",
             "name" => "required|min:2|max:255",
             "slug" => "required|min:2|max:255",

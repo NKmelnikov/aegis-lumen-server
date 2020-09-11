@@ -14,7 +14,7 @@ class ProductsDrillController
     private $productsDrillService;
 
     public $validatorRules = [
-        "brand_id" => "required",
+        "brand_id" => "nullable",
         "category_id" => "required",
         "subcategory_id" => "required",
         "active" => "required",
