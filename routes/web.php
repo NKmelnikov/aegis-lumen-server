@@ -28,6 +28,7 @@ $router->group(["prefix" => "home"], function () use ($router) {
     $router->get("/get-products-oil", "Admin\ProductsOilController@getAll");
     $router->post("/get-product-oil-by-slug", "Admin\ProductsOilController@getBySlug");
     $router->get("/get-products-drill", "Admin\ProductsDrillController@getAll");
+    $router->get("/get-metalworking", "Admin\MetalworkingController@getAll");
 });
 
 $router->group(
@@ -91,5 +92,13 @@ $router->group(
         $router->post("/bulk-activate-products-drill", "Admin\ProductsDrillController@bulkActivate");
         $router->post("/bulk-deactivate-products-drill", "Admin\ProductsDrillController@bulkDeactivate");
         $router->post("/bulk-delete-products-drill", "Admin\ProductsDrillController@bulkDelete");
+//        metalworking
+        $router->post("/create-metalworking", "Admin\MetalworkingController@create");
+        $router->post("/update-metalworking", "Admin\MetalworkingController@update");
+        $router->post("/delete-metalworking", "Admin\MetalworkingController@delete");
+        $router->post("/update-metalworking-position", "Admin\MetalworkingController@updatePosition");
+        $router->post("/bulk-activate-metalworking", "Admin\MetalworkingController@bulkActivate");
+        $router->post("/bulk-deactivate-metalworking", "Admin\MetalworkingController@bulkDeactivate");
+        $router->post("/bulk-delete-metalworking", "Admin\MetalworkingController@bulkDelete");
     }
 );
