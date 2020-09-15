@@ -15,6 +15,7 @@ $router->group(["prefix" => "auth"], function () use ($router) {
 $router->post("/ck-upload", "Admin\UploadController@ckUpload");
 $router->post("/upload-img-from-b64", "Admin\UploadController@uploadFromBase64");
 $router->post("/upload-pdf", "Admin\UploadController@uploadPdf");
+$router->post("/check-recaptcha", "RecaptchaController@checkValidity");
 
 $router->group(["prefix" => "home"], function () use ($router) {
     $router->get("/get-brands", "Admin\BrandController@getAll");
