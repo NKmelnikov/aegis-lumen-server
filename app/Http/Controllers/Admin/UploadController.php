@@ -52,12 +52,12 @@ class UploadController extends BaseController
     public function ckUpload(Request $request)
     {
         $time = time();
-        $name = $request->file('upload')->getClientOriginalName();
+        $name = $request->file('file')->getClientOriginalName();
         $url = sprintf('%s%s/storage/img/%s__%s', env('APP_URL'), env('APP_PORT'), $time, $name);
 
         try {
-            $request->file('upload')->move(storage_path('app/public/img/'), $time . '__' . $name);
-            return json_encode(['uploaded' => true,'url' => $url], JSON_UNESCAPED_SLASHES);
+            $request->file('file')->move(storage_path('app/public/img/'), $time . '__' . $name);
+            return json_encode(['link' => $url], JSON_UNESCAPED_SLASHES);
         } catch (Exception $e) {
             return response()->json(['uploaded' => true, 'error' => ['message' => $e->getMessage()]], 400);
         }
