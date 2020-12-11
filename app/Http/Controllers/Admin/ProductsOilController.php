@@ -8,10 +8,33 @@ use Illuminate\Http\Request;
 
 class ProductsOilController
 {
-    /**
-     * @var ProductsOilService
-     */
-    private $productsOilService;
+    private ProductsOilService $productsOilService;
+    private array $createValidator = [
+        "brand_id" => "nullable",
+        "category_id" => "required",
+        "subcategory_id" => "nullable",
+        "active" => "required",
+        "name" => "required|min:2|max:255",
+        "slug" => "required|min:2|max:255|unique:products_oil",
+        "description" => "nullable",
+        "spec" => "nullable",
+        "imgPath" => "required|min:2|max:255",
+        "pdf1Path" => "nullable|min:2|max:255",
+        "pdf2Path" => "nullable|min:2|max:255",
+    ];
+    private array $updateValidator = [
+        "brand_id" => "nullable",
+        "category_id" => "required",
+        "subcategory_id" => "nullable",
+        "active" => "required",
+        "name" => "required|min:2|max:255",
+        "slug" => "required|min:2|max:255",
+        "description" => "nullable",
+        "spec" => "nullable",
+        "imgPath" => "required|min:2|max:255",
+        "pdf1Path" => "nullable|min:2|max:255",
+        "pdf2Path" => "nullable|min:2|max:255",
+    ];
 
     public function __construct()
     {
@@ -27,35 +50,15 @@ class ProductsOilController
     }
 
     public function create(Request $request) {
-        return $this->productsOilService->create($request, [
-            "brand_id" => "nullable",
-            "category_id" => "required",
-            "subcategory_id" => "nullable",
-            "active" => "required",
-            "name" => "required|min:2|max:255",
-            "slug" => "required|min:2|max:255|unique:products_oil",
-            "description" => "nullable",
-            "spec" => "nullable",
-            "imgPath" => "required|min:2|max:255",
-            "pdf1Path" => "nullable|min:2|max:255",
-            "pdf2Path" => "nullable|min:2|max:255",
-        ]);
+        return $this->productsOilService->create($request, $this->createValidator);
     }
 
     public function update(Request $request) {
-        return $this->productsOilService->update($request, [
-            "brand_id" => "nullable",
-            "category_id" => "required",
-            "subcategory_id" => "nullable",
-            "active" => "required",
-            "name" => "required|min:2|max:255",
-            "slug" => "required|min:2|max:255",
-            "description" => "nullable",
-            "spec" => "nullable",
-            "imgPath" => "required|min:2|max:255",
-            "pdf1Path" => "nullable|min:2|max:255",
-            "pdf2Path" => "nullable|min:2|max:255",
-        ]);
+        return $this->productsOilService->update($request, $this->updateValidator);
+    }
+
+    public function copy(Request $request) {
+        return $this->productsOilService->copy($request, $this->createValidator);
     }
 
     public function delete(Request $request) {

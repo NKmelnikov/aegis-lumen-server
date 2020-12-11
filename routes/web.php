@@ -80,6 +80,7 @@ $router->group(
 //        products_oil
         $router->post("/create-product-oil", "Admin\ProductsOilController@create");
         $router->post("/update-product-oil", "Admin\ProductsOilController@update");
+        $router->post("/copy-product-oil", "Admin\ProductsOilController@copy");
         $router->post("/delete-product-oil", "Admin\ProductsOilController@delete");
         $router->post("/update-product-oil-position", "Admin\ProductsOilController@updatePosition");
         $router->post("/bulk-activate-products-oil", "Admin\ProductsOilController@bulkActivate");
