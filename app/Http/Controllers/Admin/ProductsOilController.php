@@ -12,7 +12,7 @@ class ProductsOilController
      * @var ProductsOilService
      */
     private $productsOilService;
-    private array $createValidator = [
+    private $createValidator = [
         "brand_id" => "nullable",
         "category_id" => "required",
         "subcategory_id" => "nullable",
@@ -25,7 +25,7 @@ class ProductsOilController
         "pdf1Path" => "nullable|min:2|max:255",
         "pdf2Path" => "nullable|min:2|max:255",
     ];
-    private array $updateValidator = [
+    private $updateValidator = [
         "brand_id" => "nullable",
         "category_id" => "required",
         "subcategory_id" => "nullable",
