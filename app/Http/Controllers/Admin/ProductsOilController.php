@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 
 class ProductsOilController
 {
-    private ProductsOilService $productsOilService;
+    /**
+     * @var ProductsOilService
+     */
+    private $productsOilService;
     private array $createValidator = [
         "brand_id" => "nullable",
         "category_id" => "required",
