@@ -8,6 +8,7 @@ use App\Models\ProductsOil;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use function response;
 
@@ -82,18 +83,19 @@ class ProductsOilService extends BaseService
 
     public function create(Request $request, $rules)
     {
+        $product = $request->all();
 
-        $validator = Validator::make($request->all(), $rules);
-
-        $request->all()['description'] = $this->clearFrolaMessage($request->all()['description']);
-        $request->all()['spec'] = $this->clearFrolaMessage($request->all()['spec']);
+        $validator = Validator::make($product, $rules);
 
         if ($validator->fails()) {
             return response()->json(['validationErrors' => $validator->errors()], 400);
         }
 
+        $product['description'] = $this->clearFrolaMessage($product['description']);
+        $product['spec'] = $this->clearFrolaMessage($product['spec']);
+
         try {
-            ProductsOil::create($request->all());
+            ProductsOil::create($product);
             $this->updatePosition();
             return response()->json(["message" => "success"]);
         } catch (Exception $e) {
@@ -103,17 +105,19 @@ class ProductsOilService extends BaseService
 
     public function update(Request $request, $rules)
     {
-        $validator = Validator::make($request->all(), $rules);
+        $product = $request->all();
 
-        $request->all()['description'] = $this->clearFrolaMessage($request->all()['description']);
-        $request->all()['spec'] = $this->clearFrolaMessage($request->all()['spec']);
+        $validator = Validator::make($product, $rules);
 
         if ($validator->fails()) {
             return response()->json(['validationErrors' => $validator->errors()], 400);
         }
 
+        $product['description'] = $this->clearFrolaMessage($product['description']);
+        $product['spec'] = $this->clearFrolaMessage($product['spec']);
+
         try {
-            ProductsOil::find($request->all()['id'])->update($request->all());
+            ProductsOil::find($product['id'])->update($product);
             return response()->json(["message" => "success"]);
         } catch (Exception $e) {
             return response()->json(["message" => $e->getMessage()], 400);
@@ -122,30 +126,33 @@ class ProductsOilService extends BaseService
 
     public function copy(Request $request, $rules)
     {
-        $validator = Validator::make($request->all(), $rules);
+        $product = $request->all();
 
-        $request->all()['description'] = $this->clearFrolaMessage($request->all()['description']);
-        $request->all()['spec'] = $this->clearFrolaMessage($request->all()['spec']);
+        $validator = Validator::make($product, $rules);
 
         if ($validator->fails()) {
             return response()->json(['validationErrors' => $validator->errors()], 400);
         }
 
+        $product['description'] = $this->clearFrolaMessage($product['description']);
+        $product['spec'] = $this->clearFrolaMessage($product['spec']);
+
+
         try {
-            $product = ProductsOil::find($request->all()['id'])->replicate();
-            $product->brand_id = $request->all()['brand_id'];
-            $product->category_id = $request->all()['category_id'];
-            $product->subcategory_id = $request->all()['subcategory_id'];
-            $product->active = $request->all()['active'];
-            $product->position = $request->all()['position'];
-            $product->name = $request->all()['name'];
-            $product->slug = $request->all()['slug'];
-            $product->description = $request->all()['description'];
-            $product->spec = $request->all()['spec'];
-            $product->imgPath = $request->all()['imgPath'];
-            $product->pdf1Path = $request->all()['pdf1Path'];
-            $product->pdf2Path = $request->all()['pdf2Path'];
-            $product->created_at = $request->all()['created_at'];
+            $product = ProductsOil::find($product['id'])->replicate();
+            $product->brand_id = $product['brand_id'];
+            $product->category_id = $product['category_id'];
+            $product->subcategory_id = $product['subcategory_id'];
+            $product->active = $product['active'];
+            $product->position = $product['position'];
+            $product->name = $product['name'];
+            $product->slug = $product['slug'];
+            $product->description = $product['description'];
+            $product->spec = $product['spec'];
+            $product->imgPath = $product['imgPath'];
+            $product->pdf1Path = $product['pdf1Path'];
+            $product->pdf2Path = $product['pdf2Path'];
+            $product->created_at = $product['created_at'];
             $product->save();
             $this->updatePosition();
             return response()->json(["message" => "success"]);
