@@ -126,33 +126,33 @@ class ProductsOilService extends BaseService
 
     public function copy(Request $request, $rules)
     {
-        $product = $request->all();
+        $rec = $request->all();
 
-        $validator = Validator::make($product, $rules);
+        $validator = Validator::make($rec, $rules);
 
         if ($validator->fails()) {
             return response()->json(['validationErrors' => $validator->errors()], 400);
         }
 
-        $product['description'] = $this->clearFrolaMessage($product['description']);
-        $product['spec'] = $this->clearFrolaMessage($product['spec']);
+        $rec['description'] = $this->clearFrolaMessage($rec['description']);
+        $rec['spec'] = $this->clearFrolaMessage($rec['spec']);
 
 
         try {
-            $product = ProductsOil::find($product['id'])->replicate();
-            $product->brand_id = $product['brand_id'];
-            $product->category_id = $product['category_id'];
-            $product->subcategory_id = $product['subcategory_id'];
-            $product->active = $product['active'];
-            $product->position = $product['position'];
-            $product->name = $product['name'];
-            $product->slug = $product['slug'];
-            $product->description = $product['description'];
-            $product->spec = $product['spec'];
-            $product->imgPath = $product['imgPath'];
-            $product->pdf1Path = $product['pdf1Path'];
-            $product->pdf2Path = $product['pdf2Path'];
-            $product->created_at = $product['created_at'];
+            $product = ProductsOil::find($rec['id'])->replicate();
+            $product->brand_id = $rec['brand_id'];
+            $product->category_id = $rec['category_id'];
+            $product->subcategory_id = $rec['subcategory_id'];
+            $product->active = $rec['active'];
+            $product->position = $rec['position'];
+            $product->name = $rec['name'];
+            $product->slug = $rec['slug'];
+            $product->description = $rec['description'];
+            $product->spec = $rec['spec'];
+            $product->imgPath = $rec['imgPath'];
+            $product->pdf1Path = $rec['pdf1Path'];
+            $product->pdf2Path = $rec['pdf2Path'];
+            $product->created_at = $rec['created_at'];
             $product->save();
             $this->updatePosition();
             return response()->json(["message" => "success"]);
