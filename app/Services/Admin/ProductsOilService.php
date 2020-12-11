@@ -85,8 +85,8 @@ class ProductsOilService extends BaseService
 
         $validator = Validator::make($request->all(), $rules);
 
-        $this->clearFrolaMessage($request->all()['description']);
-        $this->clearFrolaMessage($request->all()['spec']);
+        $request->all()['description'] = $this->clearFrolaMessage($request->all()['description']);
+        $request->all()['spec'] = $this->clearFrolaMessage($request->all()['spec']);
 
         if ($validator->fails()) {
             return response()->json(['validationErrors' => $validator->errors()], 400);
@@ -105,8 +105,8 @@ class ProductsOilService extends BaseService
     {
         $validator = Validator::make($request->all(), $rules);
 
-        $this->clearFrolaMessage($request->all()['description']);
-        $this->clearFrolaMessage($request->all()['spec']);
+        $request->all()['description'] = $this->clearFrolaMessage($request->all()['description']);
+        $request->all()['spec'] = $this->clearFrolaMessage($request->all()['spec']);
 
         if ($validator->fails()) {
             return response()->json(['validationErrors' => $validator->errors()], 400);
@@ -124,8 +124,8 @@ class ProductsOilService extends BaseService
     {
         $validator = Validator::make($request->all(), $rules);
 
-        $this->clearFrolaMessage($request->all()['description']);
-        $this->clearFrolaMessage($request->all()['spec']);
+        $request->all()['description'] = $this->clearFrolaMessage($request->all()['description']);
+        $request->all()['spec'] = $this->clearFrolaMessage($request->all()['spec']);
 
         if ($validator->fails()) {
             return response()->json(['validationErrors' => $validator->errors()], 400);
