@@ -28,6 +28,8 @@ $router->group(["prefix" => "home"], function () use ($router) {
     $router->post("/get-by-category-id", "Admin\SubcategoryController@getByCategoryId");
     $router->get("/get-products-oil", "Admin\ProductsOilController@getAll");
     $router->post("/get-product-oil-by-slug", "Admin\ProductsOilController@getBySlug");
+    $router->post("/get-product-oil-by-category-slug", "Admin\ProductsOilController@getByCategorySlug");
+    $router->post("/get-product-oil-by-subcategory-slug", "Admin\ProductsOilController@getBySubcategorySlug");
     $router->get("/get-products-drill", "Admin\ProductsDrillController@getAll");
     $router->get("/get-metalworking", "Admin\MetalworkingController@getAll");
 });
