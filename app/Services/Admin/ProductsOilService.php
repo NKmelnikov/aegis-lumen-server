@@ -26,7 +26,9 @@ class ProductsOilService extends BaseService
                 'p.subcategory_id',
                 'b.name as brand_name',
                 'c.name as category_name',
-                's.name as subcategory_name',
+                'c.slug as category_slug',
+                DB::Raw('IFNULL( `s`.`name` , "no-subcategory" ) as subcategory_name'),
+                DB::Raw('IFNULL( `s`.`slug` , "no-subcategory" ) as subcategory_slug'),
                 'p.active',
                 'p.position',
                 'p.name',
@@ -60,7 +62,9 @@ class ProductsOilService extends BaseService
                 'p.subcategory_id',
                 'b.name as brand_name',
                 'c.name as category_name',
-                's.name as subcategory_name',
+                'c.slug as category_slug',
+                DB::Raw('IFNULL( `s`.`name` , "no-subcategory" ) as subcategory_name'),
+                DB::Raw('IFNULL( `s`.`slug` , "no-subcategory" ) as subcategory_slug'),
                 'p.active',
                 'p.position',
                 'p.name',
@@ -83,7 +87,8 @@ class ProductsOilService extends BaseService
 
     public function getByCategorySlug(Request $request)
     {
-        $slug = json_decode($request['slug']);
+        $slug = $request['slug'];
+
         $productsOil = DB::table('products_oil as  p')
             ->leftJoin('brands as b', 'p.brand_id', '=', 'b.id')
             ->leftJoin('categories as c', 'p.category_id', '=', 'c.id')
@@ -94,7 +99,9 @@ class ProductsOilService extends BaseService
                 'p.subcategory_id',
                 'b.name as brand_name',
                 'c.name as category_name',
-                's.name as subcategory_name',
+                'c.slug as category_slug',
+                DB::Raw('IFNULL( `s`.`name` , "no-subcategory" ) as subcategory_name'),
+                DB::Raw('IFNULL( `s`.`slug` , "no-subcategory" ) as subcategory_slug'),
                 'p.active',
                 'p.position',
                 'p.name',
@@ -119,7 +126,8 @@ class ProductsOilService extends BaseService
 
     public function getBySubcategorySlug(Request $request)
     {
-        $slug = json_decode($request['slug']);
+        $slug = $request['slug'];
+
         $productsOil = DB::table('products_oil as  p')
             ->leftJoin('brands as b', 'p.brand_id', '=', 'b.id')
             ->leftJoin('categories as c', 'p.category_id', '=', 'c.id')
@@ -130,7 +138,9 @@ class ProductsOilService extends BaseService
                 'p.subcategory_id',
                 'b.name as brand_name',
                 'c.name as category_name',
-                's.name as subcategory_name',
+                'c.slug as category_slug',
+                DB::Raw('IFNULL( `s`.`name` , "no-subcategory" ) as subcategory_name'),
+                DB::Raw('IFNULL( `s`.`slug` , "no-subcategory" ) as subcategory_slug'),
                 'p.active',
                 'p.position',
                 'p.name',
