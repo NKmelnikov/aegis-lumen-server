@@ -48,6 +48,10 @@ class ProductsOilController
         return $this->productsOilService->getAll();
     }
 
+    public function getAllBrand() {
+        return $this->productsOilService->getAllBrand();
+    }
+
     public function getBySlug(Request $request) {
         return $this->productsOilService->getBySlug($request);
     }
@@ -58,6 +62,10 @@ class ProductsOilController
 
     public function getBySubcategorySlug(Request $request) {
         return $this->productsOilService->getBySubcategorySlug($request);
+    }
+
+    public function getByBrandSlug(Request $request) {
+        return $this->productsOilService->getByBrandSlug($request);
     }
 
     public function create(Request $request) {

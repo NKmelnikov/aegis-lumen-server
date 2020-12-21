@@ -27,9 +27,11 @@ $router->group(["prefix" => "home"], function () use ($router) {
     $router->get("/get-subcategories", "Admin\SubcategoryController@getAll");
     $router->post("/get-by-category-id", "Admin\SubcategoryController@getByCategoryId");
     $router->get("/get-products-oil", "Admin\ProductsOilController@getAll");
+    $router->get("/get-products-oil-by-brand", "Admin\ProductsOilController@getAllBrand");
     $router->post("/get-product-oil-by-slug", "Admin\ProductsOilController@getBySlug");
     $router->post("/get-product-oil-by-category-slug", "Admin\ProductsOilController@getByCategorySlug");
     $router->post("/get-product-oil-by-subcategory-slug", "Admin\ProductsOilController@getBySubcategorySlug");
+    $router->post("/get-product-oil-by-brand-slug", "Admin\ProductsOilController@getByBrandSlug");
     $router->get("/get-products-drill", "Admin\ProductsDrillController@getAll");
     $router->get("/get-metalworking", "Admin\MetalworkingController@getAll");
 });
