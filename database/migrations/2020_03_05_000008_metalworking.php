@@ -16,7 +16,7 @@ class Metalworking extends Migration
         Schema::create('metalworking', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->smallInteger('active')->unsigned()->default(1);
-            $table->smallInteger('position')->unsigned()->default(1);
+            $table->smallInteger('position')->unsigned()->default(0);
             $table->string('name')->nullable();
             $table->mediumText('description')->nullable();
             $table->string('imgPath');

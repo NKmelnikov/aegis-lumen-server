@@ -18,7 +18,7 @@ class Subcategories extends Migration
             $table->increments('id');
             $table->integer('category_id')->unsigned()->nullable();
             $table->smallInteger('active')->unsigned()->default(1);
-            $table->smallInteger('position')->unsigned()->default(1);
+            $table->smallInteger('position')->unsigned()->default(0);
             $table->string('name');
             $table->mediumText('description');
             $table->timestamps();

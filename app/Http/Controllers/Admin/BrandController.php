@@ -18,6 +18,17 @@ class BrandController
         $this->brandService = new BrandService(Brand::class);
     }
 
+    private function getValidatorRules($isUpdateMethod = false) {
+
+        return [
+            "active" => "required",
+            "slug" => ($isUpdateMethod) ? "required|min:2" : 'required|min:2|unique:brands',
+            "name" => "required|min:2|max:255",
+            "description" => "nullable",
+            "imgPath" => "required|string|min:2|max:255",
+        ];
+    }
+
     public function getAll()
     {
         return $this->brandService->getAll();
@@ -30,25 +41,16 @@ class BrandController
 
     public function create(Request $request)
     {
-        return $this->brandService->create($request, [
-            "active" => "required",
-            "slug" => "required|min:2|unique:brands",
-            "name" => "required|min:2|max:255",
-            "description" => "nullable",
-            "imgPath" => "required|string|min:2|max:255",
-        ]);
+        return $this->brandService->create($request, $this->getValidatorRules());
     }
 
     public function update(Request $request)
     {
-        return $this->brandService->update($request, [
-                "active" => "required",
-                "slug" => "required|min:2",
-                "name" => "required|min:2|max:255",
-                "description" => "nullable",
-                "imgPath" => "required|string|min:2|max:255",
-            ]
-        );
+        return $this->brandService->update($request, $this->getValidatorRules(true));
+    }
+
+    public function copy(Request $request) {
+        return $this->brandService->copy($request, $this->getValidatorRules());
     }
 
     public function delete(Request $request)

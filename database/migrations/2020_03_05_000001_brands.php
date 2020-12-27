@@ -16,7 +16,7 @@ class Brands extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->increments('id');
             $table->smallInteger('active')->unsigned()->default(1);
-            $table->smallInteger('position')->unsigned()->default(1);
+            $table->smallInteger('position')->unsigned()->default(0);
             $table->string('slug', 200)->unique();
             $table->string('name');
             $table->mediumText('description');

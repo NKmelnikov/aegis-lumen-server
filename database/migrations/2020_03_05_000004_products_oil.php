@@ -19,7 +19,7 @@ class ProductsOil extends Migration
             $table->integer('category_id')->unsigned()->nullable();
             $table->integer('subcategory_id')->unsigned()->nullable();
             $table->smallInteger('active')->unsigned()->default(1);
-            $table->smallInteger('position')->unsigned()->default(1);
+            $table->smallInteger('position')->unsigned()->default(0);
             $table->string('name');
             $table->string('slug');
             $table->mediumText('description');

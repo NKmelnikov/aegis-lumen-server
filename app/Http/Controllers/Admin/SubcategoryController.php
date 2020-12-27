@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Subcategory;
 use App\Services\Admin\SubcategoryService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SubcategoryController
 {
@@ -12,14 +13,6 @@ class SubcategoryController
      * @var SubcategoryService
      */
     private $subcategoryService;
-
-    public $validatorRules = [
-        "active" => "required",
-        "category_id" => "required",
-        "name" => "required|max:255",
-        "description" => "nullable",
-    ];
-
 
     public function __construct()
     {
@@ -30,16 +23,30 @@ class SubcategoryController
         return $this->subcategoryService->getAll();
     }
 
+    private function getValidatorRules($isUpdateMethod = false) {
+        return [
+            "active" => "required",
+            "category_id" => "required",
+            "name" => "required|max:255",
+            "slug" => ($isUpdateMethod) ? "required|min:2|max:255" : "required|min:2|max:255|unique:subcategories",
+            "description" => "nullable",
+        ];
+    }
+
     public function getByCategoryId(Request $request) {
         return $this->subcategoryService->getByCategoryId($request);
     }
 
     public function create(Request $request) {
-        return $this->subcategoryService->create($request, $this->validatorRules);
+        return $this->subcategoryService->create($request, $this->getValidatorRules());
     }
 
     public function update(Request $request) {
-        return $this->subcategoryService->update($request, $this->validatorRules);
+        return $this->subcategoryService->update($request, $this->getValidatorRules(true));
+    }
+
+    public function copy(Request $request) {
+        return $this->subcategoryService->copy($request, $this->getValidatorRules());
     }
 
     public function delete(Request $request) {

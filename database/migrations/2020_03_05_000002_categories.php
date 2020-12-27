@@ -16,7 +16,7 @@ class Categories extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->smallInteger('active')->unsigned()->default(1);
-            $table->smallInteger('position')->unsigned()->default(1);
+            $table->smallInteger('position')->unsigned()->default(0);
             $table->smallInteger('type')->unsigned()->default(1);
             $table->string('name');
             $table->mediumText('description');

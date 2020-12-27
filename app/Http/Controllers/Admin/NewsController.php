@@ -18,6 +18,18 @@ class NewsController
         $this->newsService = new NewsService(News::class);
     }
 
+    private function getValidatorRules($isUpdateMethod = false) {
+
+        return [
+            "active" => "required",
+            "slug" => ($isUpdateMethod) ? "required|min:2|max:200" : "required|min:2|max:200|unique:news",
+            "title" => "required|min:2|max:255",
+            "shortText" => "required|min:2|max:400",
+            "article" => "required",
+            "imgPath" => "required|string|min:2|max:255",
+        ];
+    }
+
     public function getAll()
     {
         return $this->newsService->getAll();
@@ -25,26 +37,16 @@ class NewsController
 
     public function create(Request $request)
     {
-        return $this->newsService->create($request, [
-            "active" => "required",
-            "slug" => "required|min:2|max:200|unique:news",
-            "title" => "required|min:2|max:255",
-            "shortText" => "required|min:2|max:400",
-            "article" => "required",
-            "imgPath" => "required|string|min:2|max:255",
-        ]);
+        return $this->newsService->create($request, $this->getValidatorRules());
     }
 
     public function update(Request $request)
     {
-        return $this->newsService->update($request, [
-            "active" => "required",
-            "slug" => "required|min:2|max:200",
-            "title" => "required|min:2|max:255",
-            "shortText" => "required|min:2|max:400",
-            "article" => "required",
-            "imgPath" => "required|string|min:2|max:255",
-        ]);
+        return $this->newsService->update($request, $this->getValidatorRules(true));
+    }
+
+    public function copy(Request $request) {
+        return $this->newsService->copy($request, $this->getValidatorRules());
     }
 
     public function delete(Request $request)

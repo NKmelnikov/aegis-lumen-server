@@ -4,6 +4,7 @@
 namespace App\Services\Admin;
 
 
+use App\Models\ProductsOil;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -39,6 +40,18 @@ class BaseService
             return response()->json(['validationErrors' => $validator->errors()], 400);
         }
 
+        if(isset($request->all()['description'])) {
+            $request->all()['description'] = $this->clearFrolaMessage($request->all()['description']);
+        }
+
+        if(isset($request->all()['spec'])) {
+            $request->all()['spec'] = $this->clearFrolaMessage($request->all()['spec']);
+        }
+
+        if(isset($request->all()['article'])) {
+            $request->all()['article'] = $this->clearFrolaMessage($request->all()['article']);
+        }
+
         try {
             $this->model::create($request->all());
             $this->updatePosition();
@@ -56,6 +69,18 @@ class BaseService
             return response()->json(['validationErrors' => $validator->errors()], 400);
         }
 
+        if(isset($request->all()['description'])) {
+            $request->all()['description'] = $this->clearFrolaMessage($request->all()['description']);
+        }
+
+        if(isset($request->all()['spec'])) {
+            $request->all()['spec'] = $this->clearFrolaMessage($request->all()['spec']);
+        }
+
+        if(isset($request->all()['article'])) {
+            $request->all()['article'] = $this->clearFrolaMessage($request->all()['article']);
+        }
+
         try {
             $this->model::find($request->all()['id'])->update($request->all());
             return response()->json(["message" => "success"]);
@@ -63,6 +88,38 @@ class BaseService
             return response()->json(["message" => $e->getMessage()], 400);
         }
     }
+
+    public function copy(Request $request, $rules)
+    {
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json(['validationErrors' => $validator->errors()], 400);
+        }
+
+        if(isset($request->all()['description'])) {
+            $request->all()['description'] = $this->clearFrolaMessage($request->all()['description']);
+        }
+
+        if(isset($request->all()['spec'])) {
+            $request->all()['spec'] = $this->clearFrolaMessage($request->all()['spec']);
+        }
+
+        if(isset($request->all()['article'])) {
+            $request->all()['article'] = $this->clearFrolaMessage($request->all()['article']);
+        }
+
+        try {
+            $copy = $this->model::find($request->all()['id'])->replicate()->fill($request->all());
+            $copy->position = $request->all()['position'] - 1;
+            $copy->save();
+            $this->updatePosition();
+            return response()->json(["message" => "success"]);
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 400);
+        }
+    }
+
 
     public function delete(Request $request)
     {
@@ -77,9 +134,11 @@ class BaseService
 
     public function updatePosition(Request $request = null)
     {
+
         $items = (!is_null($request))
             ? json_decode($request['data'], true)
-            : $this->model::orderBy('created_at', 'DESC')->get();
+            : $this->model::orderBy('position', 'ASC')->get();
+//        $items = $this->model::orderBy('created_at', 'DESC')->get();
 
         foreach ($items as $i => $item) {
             try {
@@ -132,5 +191,9 @@ class BaseService
         }
 
         return response()->json(["message" => "deleted"]);
+    }
+
+    protected function clearFrolaMessage($text) {
+        return str_replace('<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>', '', $text);
     }
 }

@@ -17,7 +17,7 @@ class Catalogs extends Migration
             $table->increments('id');
             $table->integer('brand_id')->unsigned()->index()->nullable();
             $table->smallInteger('active')->unsigned()->default(1);
-            $table->smallInteger('position')->unsigned()->default(1);
+            $table->smallInteger('position')->unsigned()->default(0);
             $table->string('name')->nullable();
             $table->string('pdfPath');
             $table->timestamps();

@@ -44,6 +44,7 @@ $router->group(
 //        brands
         $router->post("/create-brand", "Admin\BrandController@create");
         $router->post("/update-brand", "Admin\BrandController@update");
+        $router->post("/copy-brand", "Admin\BrandController@copy");
         $router->post("/delete-brand", "Admin\BrandController@delete");
         $router->post("/update-brand-position", "Admin\BrandController@updatePosition");
         $router->post("/bulk-activate-brands", "Admin\BrandController@bulkActivate");
@@ -52,6 +53,7 @@ $router->group(
 //        catalogs
         $router->post("/create-catalog", "Admin\CatalogController@create");
         $router->post("/update-catalog", "Admin\CatalogController@update");
+        $router->post("/copy-catalog", "Admin\CatalogController@copy");
         $router->post("/delete-catalog", "Admin\CatalogController@delete");
         $router->post("/update-catalog-position", "Admin\CatalogController@updatePosition");
         $router->post("/bulk-activate-catalogs", "Admin\CatalogController@bulkActivate");
@@ -60,6 +62,7 @@ $router->group(
 //        news
         $router->post("/create-post", "Admin\NewsController@create");
         $router->post("/update-post", "Admin\NewsController@update");
+        $router->post("/copy-post", "Admin\NewsController@copy");
         $router->post("/delete-post", "Admin\NewsController@delete");
         $router->post("/update-post-position", "Admin\NewsController@updatePosition");
         $router->post("/bulk-activate-posts", "Admin\NewsController@bulkActivate");
@@ -68,6 +71,7 @@ $router->group(
 //        categories
         $router->post("/create-category", "Admin\CategoryController@create");
         $router->post("/update-category", "Admin\CategoryController@update");
+        $router->post("/copy-category", "Admin\CategoryController@copy");
         $router->post("/delete-category", "Admin\CategoryController@delete");
         $router->post("/update-category-position", "Admin\CategoryController@updatePosition");
         $router->post("/bulk-activate-categories", "Admin\CategoryController@bulkActivate");
@@ -76,6 +80,7 @@ $router->group(
 //        subcategories
         $router->post("/create-subcategory", "Admin\SubcategoryController@create");
         $router->post("/update-subcategory", "Admin\SubcategoryController@update");
+        $router->post("/copy-subcategory", "Admin\SubcategoryController@copy");
         $router->post("/delete-subcategory", "Admin\SubcategoryController@delete");
         $router->post("/update-subcategory-position", "Admin\SubcategoryController@updatePosition");
         $router->post("/bulk-activate-subcategories", "Admin\SubcategoryController@bulkActivate");
@@ -101,6 +106,7 @@ $router->group(
 //        metalworking
         $router->post("/create-metalworking", "Admin\MetalworkingController@create");
         $router->post("/update-metalworking", "Admin\MetalworkingController@update");
+        $router->post("/copy-metalworking", "Admin\MetalworkingController@copy");
         $router->post("/delete-metalworking", "Admin\MetalworkingController@delete");
         $router->post("/update-metalworking-position", "Admin\MetalworkingController@updatePosition");
         $router->post("/bulk-activate-metalworking", "Admin\MetalworkingController@bulkActivate");

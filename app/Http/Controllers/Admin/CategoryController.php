@@ -13,16 +13,20 @@ class CategoryController
      */
     private $categoryService;
 
-    public $validatorRules = [
-        "active" => "required",
-        "type" => "required",
-        "name" => "required|max:255",
-        "description" => "nullable",
-    ];
-
     public function __construct()
     {
         $this->categoryService = new CategoryService(Category::class);
+    }
+
+    private function getValidatorRules($isUpdateMethod = false) {
+
+        return [
+            "active" => "required",
+            "type" => "required",
+            "slug" => ($isUpdateMethod) ? "required|min:2" : 'required|min:2|unique:categories',
+            "name" => "required|max:255",
+            "description" => "nullable",
+        ];
     }
 
     public function getAll() {
@@ -34,11 +38,15 @@ class CategoryController
     }
 
     public function create(Request $request) {
-        return $this->categoryService->create($request, $this->validatorRules);
+        return $this->categoryService->create($request, $this->getValidatorRules());
     }
 
     public function update(Request $request) {
-        return $this->categoryService->update($request, $this->validatorRules);
+        return $this->categoryService->update($request, $this->getValidatorRules(true));
+    }
+
+    public function copy(Request $request) {
+        return $this->categoryService->copy($request, $this->getValidatorRules());
     }
 
     public function delete(Request $request) {
