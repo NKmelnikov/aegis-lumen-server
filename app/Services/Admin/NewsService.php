@@ -12,7 +12,7 @@ use function response;
 
 class NewsService extends BaseService
 {
-    public function getBrandBySlug(Request $request)
+    public function getNewsItemBySlug(Request $request)
     {
         try {
             return response()->json(News::where('slug', $request->all()['slug'])->first());

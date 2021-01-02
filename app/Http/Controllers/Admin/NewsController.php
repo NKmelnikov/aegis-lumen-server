@@ -35,6 +35,10 @@ class NewsController
         return $this->newsService->getAll();
     }
 
+    public function getNewsItemBySlug(Request $request) {
+        return $this->newsService->getNewsItemBySlug($request);
+    }
+
     public function create(Request $request)
     {
         return $this->newsService->create($request, $this->getValidatorRules());

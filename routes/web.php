@@ -34,6 +34,7 @@ $router->group(["prefix" => "home"], function () use ($router) {
     $router->post("/get-product-oil-by-brand-slug", "Admin\ProductsOilController@getByBrandSlug");
     $router->get("/get-products-drill", "Admin\ProductsDrillController@getAll");
     $router->get("/get-metalworking", "Admin\MetalworkingController@getAll");
+    $router->post("/get-news-item-by-slug", "Admin\NewsController@getNewsItemBySlug");
 });
 
 $router->group(
